@@ -6,14 +6,14 @@ export default function Home() {
   return (
     <>
       <header className="bg-gradient-to-r from-pink-500 to-yellow-500 text-white py-8">
-        <div className="max-w-4xl mx-auto px-4">
+        <div className="md:max-w-4xl mx-auto md:px-4">
           <h1 className="text-4xl font-bold tracking-wide text-center">
             Saavya`s Rice Feeding Ceremony
           </h1>
           <p className="text-xl font-semibold text-center mt-4">
             March 9th, 2024
           </p>
-          <div className="m-2 md:flex justify-center mt-8">
+          <div className="md:m-2 md:flex justify-center md:mt-8">
             <Image
               src="/images/ACE03756.jpg"
               width={800}

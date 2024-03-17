@@ -118,7 +118,7 @@ const ImageGallery = () => {
           <Image
             key={index}
             src={image?.src}
-            className="w-auto h-full object-cover cursor-pointer"
+            className="w-auto h-full object-cover cursor-pointer pointer-events-none md:pointer-events-auto"
             alt={image.alt}
             width={400}
             height={400}
