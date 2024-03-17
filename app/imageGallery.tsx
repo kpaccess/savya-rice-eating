@@ -89,7 +89,12 @@ const ImageGallery = () => {
                 className="absolute top-2 right-2 text-gray-800"
                 onClick={closeModal}
               >
-                Close
+                <Image
+                  src={"/images/close_icon.svg"}
+                  width={20}
+                  height={20}
+                  alt="close"
+                />
               </button>
             </div>
           </div>
