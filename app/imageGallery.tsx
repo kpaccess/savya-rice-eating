@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import useWindowSize from "./hooks/windowSize";
 
 type ImageData = {
   src: string;
@@ -10,7 +11,9 @@ type ImageData = {
 const imageFilenames = [
   "ACE03719.jpg",
   "ACE03750.jpg",
+  "ACE03756.jpg",
   "ACE03760.jpg",
+  "ACE03767.jpg",
   "ACE03768.jpg",
   "ACE03773.jpg",
   "ACE03777.jpg",
@@ -22,14 +25,61 @@ const imageFilenames = [
   "ACE03825.jpg",
   "ACE03833.jpg",
   "ACE03840.jpg",
+  "ACE03845.jpg",
+  "ACE03846.jpg",
+  "ACE03850.jpg",
+  "ACE03852.jpg",
+  "ACE03855.jpg",
+  "ACE03862.jpg",
+  "ACE03864.jpg",
+  "ACE03866.jpg",
+  "ACE03867.jpg",
+  "ACE03870.jpg",
+  "ACE03873.jpg",
+  "ACE03875.jpg",
+  "close_icon.svg",
   "DSC00001.jpg",
+  "DSC00869.jpg",
+  "DSC00875.jpg",
+  "DSC00876.jpg",
+  "DSC00879.jpg",
+  "DSC00880.jpg",
+  "DSC00883.jpg",
+  "DSC00884.jpg",
+  "DSC00885.jpg",
+  "DSC00886.jpg",
+  "DSC00887.jpg",
+  "DSC00893.jpg",
+  "DSC00895.jpg",
+  "DSC00897.jpg",
+  "DSC00900.jpg",
+  "DSC00904.jpg",
+  "DSC00910.jpg",
+  "DSC00962.jpg",
   "DSC00975.jpg",
+  "DSC01018.jpg",
+  "DSC01024.jpg",
+  "DSC01025.jpg",
+  "DSC01030.jpg",
+  "DSC01040.jpg",
+  "DSC01051.jpg",
+  "DSC01056.jpg",
+  "DSC01062.jpg",
+  "DSC01068.jpg",
+  "DSC01078.jpg",
+  "DSC01081.jpg",
+  "DSC01082.jpg",
+  "DSC01084.jpg",
+  "DSC01087.jpg",
+  "DSC01089.jpg",
+  "DSC01099.jpg",
 ];
 
 const ImageGallery = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [selectedImage, setSelectedImage] = useState<ImageData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const windowSize = useWindowSize();
 
   const handleImageClick = (index: number) => {
     setSelectedImage(images[index]);
@@ -55,6 +105,12 @@ const ImageGallery = () => {
     setIsLoading(false);
   };
 
+  useEffect(() => {
+    if (windowSize.width && windowSize.width <= 768) {
+      setShowModal(false); // Close modal on mobile view
+    }
+  }, [windowSize.width]);
+
   return (
     <div className="grid  md:grid-cols-4 gap-4">
       {images?.map((image, index) => (
@@ -62,7 +118,7 @@ const ImageGallery = () => {
           <Image
             key={index}
             src={image?.src}
-            className={`w-full h-full object-cover cursor-pointer`}
+            className="w-auto h-full object-cover cursor-pointer"
             alt={image.alt}
             width={400}
             height={400}
