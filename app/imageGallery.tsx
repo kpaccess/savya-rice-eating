@@ -23,6 +23,7 @@ const imageFilenames = [
 
 const ImageGallery = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isFullScreen, setIsFullScreen] = useState(false);
 
   const images: { src: string; alt: string }[] = [];
   for (const filename of imageFilenames) {
@@ -35,16 +36,18 @@ const ImageGallery = () => {
   }
 
   return (
-    <div className="grid grid-cols-3 gap-4p">
+    <div className="grid  md:grid-cols-4 gap-4">
       {images?.map((image, index) => (
-        <div key={index} className="border border-gray-200 m-2">
+        <div key={index} className="border border-gray-200 m-2 grid gap-4">
           <Image
             key={index}
             src={image?.src}
+            className={`w-full h-full object-cover ${
+              isFullScreen ? "cursor-zoom-out" : "cursor-pointer"
+            }`}
             alt={image.alt}
-            className="w-full h-full object-cover cursor-pointer"
-            width={400}
-            height={400}
+            width={isFullScreen ? 800 : 400}
+            height={isFullScreen ? 800 : 400}
           />
         </div>
       ))}

@@ -1,9 +1,10 @@
 "use client";
 import ImageGallery from "./imageGallery";
+import Image from "next/image";
 
 export default function Home() {
   return (
-    <main>
+    <>
       <header className="bg-gradient-to-r from-pink-500 to-yellow-500 text-white py-8">
         <div className="max-w-4xl mx-auto px-4">
           <h1 className="text-4xl font-bold tracking-wide text-center">
@@ -12,10 +13,32 @@ export default function Home() {
           <p className="text-xl font-semibold text-center mt-4">
             March 9th, 2024
           </p>
+          <div className="flex justify-center mt-8">
+            <Image
+              src="/images/ACE03756.jpg"
+              width={800}
+              height={800}
+              alt="Saavya with mom and dad"
+              className="rounded-full"
+            />
+            <Image
+              src="/images/ACE03719.jpg"
+              width={800}
+              height={800}
+              alt="Saavya with mom and dad"
+              className="rounded-full"
+            />
+          </div>
         </div>
       </header>
 
-      <section className="py-12">
+      <section className="py-12 flex">
+        <Image
+          src="/images/ACE03767.jpg"
+          width={800}
+          height={800}
+          alt="Saavya with mom, dad and grandma"
+        />
         <div className="max-w-4xl mx-auto px-4">
           <p className="text-lg leading-relaxed mb-6">
             Saavya`s Rice Feeding Ceremony, held on March 9th, 2024, was a
@@ -47,6 +70,6 @@ export default function Home() {
       </section>
       {/* Image Gallery */}
       <ImageGallery />
-    </main>
+    </>
   );
 }
