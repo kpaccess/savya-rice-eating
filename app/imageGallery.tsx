@@ -2,6 +2,11 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
+type ImageData = {
+  src: string;
+  alt: string;
+};
+
 const imageFilenames = [
   "ACE03719.jpg",
   "ACE03750.jpg",
@@ -22,8 +27,19 @@ const imageFilenames = [
 ];
 
 const ImageGallery = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isFullScreen, setIsFullScreen] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<ImageData | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const handleImageClick = (index: number) => {
+    setSelectedImage(images[index]);
+    setShowModal(true);
+    setIsLoading(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   const images: { src: string; alt: string }[] = [];
   for (const filename of imageFilenames) {
@@ -35,6 +51,10 @@ const ImageGallery = () => {
     }
   }
 
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
+
   return (
     <div className="grid  md:grid-cols-4 gap-4">
       {images?.map((image, index) => (
@@ -42,15 +62,39 @@ const ImageGallery = () => {
           <Image
             key={index}
             src={image?.src}
-            className={`w-full h-full object-cover ${
-              isFullScreen ? "cursor-zoom-out" : "cursor-pointer"
-            }`}
+            className={`w-full h-full object-cover cursor-pointer`}
             alt={image.alt}
-            width={isFullScreen ? 800 : 400}
-            height={isFullScreen ? 800 : 400}
+            width={400}
+            height={400}
+            onClick={() => handleImageClick(index)}
           />
         </div>
       ))}
+
+      {/* Modal */}
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex justify-center items-center bg-gray-800 bg-opacity-50">
+          <div className="bg-white p-4 max-w-screen-md">
+            {isLoading && <p>Loading...</p>}
+            <div className="relative w-[40rem] h-[60rem]">
+              <Image
+                src={selectedImage!.src}
+                alt={selectedImage!.alt}
+                className="absolute inset-0 w-full h-full object-contain"
+                width={1200}
+                height={1200}
+                onLoad={handleImageLoad}
+              />
+              <button
+                className="absolute top-2 right-2 text-gray-800"
+                onClick={closeModal}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

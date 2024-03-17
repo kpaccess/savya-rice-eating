@@ -19,14 +19,12 @@ export default function Home() {
               width={800}
               height={800}
               alt="Saavya with mom and dad"
-              className="rounded-full"
             />
             <Image
               src="/images/ACE03719.jpg"
               width={800}
               height={800}
               alt="Saavya with mom and dad"
-              className="rounded-full"
             />
           </div>
         </div>
