@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import useWindowSize from "./hooks/windowSize";
 
 type ImageData = {
   src: string;
@@ -76,13 +75,40 @@ const imageFilenames = [
   "DSC01087.jpg",
   "DSC01089.jpg",
   "DSC01099.jpg",
+  "ACE03737.jpg",
+  "ACE03744.jpg",
+  "ACE03748.jpg",
+  "ACE03772.jpg",
+  "ACE03801.jpg",
+  "ACE03819.jpg",
+  "ACE03882.jpg",
+  "ACE03885.jpg",
+  "ACE03889.jpg",
+  "ACE03890.jpg",
+  "ACE03891.jpg",
+  "ACE03899.jpg",
+  "ACE03905.jpg",
+  "ACE03909.jpg",
+  "ACE03915.jpg",
+  "ACE03917.jpg",
+  "ACE03919.jpg",
+  "ACE03921.jpg",
+  "ACE03924.jpg",
+  "ACE03938.jpg",
+  "ACE03951.jpg",
+  "ACE03984.jpg",
+  "ACE03986.jpg",
+  "ACE03988.jpg",
+  "ACE03990.jpg",
+  "ACE03993.jpg",
+  "ACE03995.jpg",
+  "ACE04002.jpg",
 ];
 
 const ImageGallery = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [selectedImage, setSelectedImage] = useState<ImageData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const windowSize = useWindowSize();
 
   const handleImageClick = (index: number) => {
     setSelectedImage(images[index]);
@@ -107,12 +133,6 @@ const ImageGallery = () => {
   const handleImageLoad = () => {
     setIsLoading(false);
   };
-
-  useEffect(() => {
-    if (windowSize.width && windowSize.width <= 768) {
-      setShowModal(false); // Close modal on mobile view
-    }
-  }, [windowSize.width]);
 
   return (
     <div className="grid  md:grid-cols-4 gap-4">
