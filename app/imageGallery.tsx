@@ -109,11 +109,14 @@ const ImageGallery = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [selectedImage, setSelectedImage] = useState<ImageData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [imageHeight, setImageHeight] = useState<number>(0);
 
-  const handleImageClick = (index: number) => {
+  const handleImageClick = (index: number, event: React.MouseEvent) => {
     setSelectedImage(images[index]);
     setShowModal(true);
     setIsLoading(true);
+    const image = event.target as HTMLImageElement;
+    setImageHeight(image.height);
   };
 
   const closeModal = () => {
@@ -134,6 +137,8 @@ const ImageGallery = () => {
     setIsLoading(false);
   };
 
+  const modalHeight = `relative w-[40rem] h-[${imageHeight}px]`;
+
   return (
     <div className="grid  md:grid-cols-4 gap-4">
       {images?.map((image, index) => (
@@ -145,7 +150,7 @@ const ImageGallery = () => {
             alt={image.alt}
             width={400}
             height={400}
-            onClick={() => handleImageClick(index)}
+            onClick={(e) => handleImageClick(index, e)}
           />
         </div>
       ))}
@@ -155,13 +160,13 @@ const ImageGallery = () => {
         <div className="fixed inset-0 z-50 flex justify-center items-center bg-gray-800 bg-opacity-50">
           <div className="bg-white p-4 max-w-screen-md">
             {isLoading && <p>Loading...</p>}
-            <div className="relative w-[40rem] h-[60rem]">
+            <div className="relative w-[40rem] h-[40rem]">
               <Image
                 src={selectedImage!.src}
                 alt={selectedImage!.alt}
                 className="absolute inset-0 w-full h-full object-contain"
                 width={1200}
-                height={1200}
+                height={imageHeight ?? 1200}
                 onLoad={handleImageLoad}
               />
               <button
